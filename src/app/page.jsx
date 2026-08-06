@@ -7,7 +7,7 @@ import { CodeDemo } from "@/components/demo-components-animate-code";
 
 export default function Home() {
   return (
-    <div className="bg-slate-950 text-slate-100 min-h-[calc(100vh-81px)] overflow-hidden relative selection:bg-indigo-500/30">
+    <div className="bg-slate-950 text-slate-100 min-h-[calc(100vh-81px)] overflow-hidden relative selection:bg-indigo-500/30 isolate">
       {/* Background stars component */}
       <StarsBackgroundDemo />
 
@@ -16,7 +16,7 @@ export default function Home() {
       <div className="absolute top-1/3 left-1/3 w-[250px] h-[250px] bg-emerald-500/10 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Hero Section */}
-      <section className="relative z-10 min-h-[calc(100vh-81px)] grid grid-cols-1 lg:grid-cols-5 px-6 lg:px-12 pt-8 lg:pt-12 pb-12 gap-8 items-center max-w-7xl mx-auto">
+      <section className="relative isolate z-10 min-h-[calc(100vh-81px)] grid grid-cols-1 lg:grid-cols-5 px-6 lg:px-12 pt-8 lg:pt-12 pb-12 gap-8 items-center max-w-7xl mx-auto">
         
         {/* Left Content Column */}
         <div className="col-span-full lg:col-span-3 flex flex-col items-center lg:items-start text-center lg:text-left">
