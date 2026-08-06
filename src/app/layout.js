@@ -1,8 +1,9 @@
 import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
 import { Geist, Geist_Mono, Lora } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ModeToggle } from "@/components/mode-toggle";
+import { Header } from "@/components/header";
 
 const lora = Lora({
   subsets: ["latin"],
@@ -28,7 +29,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+      }}
+    >
       <html
         lang="en"
         suppressHydrationWarning
@@ -41,16 +46,7 @@ export default function RootLayout({ children }) {
             enableSystem
             disableTransitionOnChange
           >
-            {/* Header */}
-            <header className="border-b border-border/40 bg-background/95 backdrop-blur-md sticky top-0 z-50">
-              <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-                <h1 className="text-xl font-bold font-serif tracking-tight text-foreground select-none">
-                  Mockmate-AI
-                </h1>
-
-                <ModeToggle />
-              </div>
-            </header>
+            <Header />
 
             <main className="flex-1">
               {children}
