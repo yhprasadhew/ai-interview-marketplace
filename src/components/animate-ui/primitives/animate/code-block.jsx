@@ -31,9 +31,21 @@ function CodeBlock({
     inViewMargin,
   });
 
-  const [visibleCode, setVisibleCode] = React.useState('');
+  const [visibleCode, setVisibleCode] = React.useState(() => !writing ? code : '');
+  const [prevProps, setPrevProps] = React.useState({ code, writing });
+
+  if (prevProps.code !== code || prevProps.writing !== writing) {
+    setPrevProps({ code, writing });
+    if (!writing) {
+      setVisibleCode(code);
+    } else {
+      setVisibleCode('');
+    }
+  }
+
   const [highlightedCode, setHighlightedCode] = React.useState('');
   const [isDone, setIsDone] = React.useState(false);
+  const [restartTrigger, setRestartTrigger] = React.useState(0);
 
   React.useEffect(() => {
     if (!visibleCode.length || !isInView) return;
@@ -59,7 +71,6 @@ function CodeBlock({
 
   React.useEffect(() => {
     if (!writing) {
-      setVisibleCode(code);
       onDone?.();
       onWrite?.({ index: code.length, length: code.length, done: true });
       return;
@@ -72,6 +83,7 @@ function CodeBlock({
     const totalDuration = duration;
     const interval = totalDuration / characters.length;
     let intervalId;
+    let timeoutId;
 
     const timeout = setTimeout(() => {
       intervalId = setInterval(() => {
@@ -99,6 +111,12 @@ function CodeBlock({
             length: characters.length,
             done: true,
           });
+          
+          timeoutId = setTimeout(() => {
+            setVisibleCode('');
+            setIsDone(false);
+            setRestartTrigger((prev) => prev + 1);
+          }, 4000);
         }
       }, interval);
     }, delay);
@@ -106,8 +124,9 @@ function CodeBlock({
     return () => {
       clearTimeout(timeout);
       clearInterval(intervalId);
+      clearTimeout(timeoutId);
     };
-  }, [code, duration, delay, isInView, writing, onDone, onWrite, localRef]);
+  }, [code, duration, delay, isInView, writing, onDone, onWrite, localRef, restartTrigger]);
 
   React.useEffect(() => {
     if (!writing || !isInView) return;

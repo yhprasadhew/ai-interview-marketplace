@@ -18,21 +18,30 @@ function StarLayer({
   count = 1000,
   size = 1,
   transition = { repeat: Infinity, duration: 50, ease: 'linear' },
+  twinkleDuration = 4,
   starColor = '#fff',
   className,
   ...props
 }) {
-  const [boxShadow, setBoxShadow] = React.useState('');
+  const [boxShadow, setBoxShadow] = React.useState(() => generateStars(count, starColor));
+  const [prevProps, setPrevProps] = React.useState({ count, starColor });
 
-  React.useEffect(() => {
+  if (prevProps.count !== count || prevProps.starColor !== starColor) {
+    setPrevProps({ count, starColor });
     setBoxShadow(generateStars(count, starColor));
-  }, [count, starColor]);
+  }
 
   return (
     <motion.div
       data-slot="star-layer"
-      animate={{ y: [0, -2000] }}
-      transition={transition}
+      animate={{
+        y: [0, -2000],
+        opacity: [0.15, 0.85, 0.35, 0.85, 0.15]
+      }}
+      transition={{
+        y: transition,
+        opacity: { repeat: Infinity, duration: twinkleDuration, ease: 'easeInOut' }
+      }}
       className={cn('absolute top-0 left-0 w-full h-[2000px]', className)}
       {...props}>
       <div
@@ -94,24 +103,27 @@ function StarsBackground({
           count={1000}
           size={1}
           transition={{ repeat: Infinity, duration: speed, ease: 'linear' }}
+          twinkleDuration={4}
           starColor={starColor} />
         <StarLayer
           count={400}
           size={2}
           transition={{
             repeat: Infinity,
-            duration: speed * 2,
+            duration: speed * 1.5,
             ease: 'linear',
           }}
+          twinkleDuration={6}
           starColor={starColor} />
         <StarLayer
           count={200}
           size={3}
           transition={{
             repeat: Infinity,
-            duration: speed * 3,
+            duration: speed * 2,
             ease: 'linear',
           }}
+          twinkleDuration={8}
           starColor={starColor} />
       </motion.div>
       {children}
