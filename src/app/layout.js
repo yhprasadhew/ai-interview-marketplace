@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono, Lora } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const lora = Lora({
   subsets: ["latin"],
@@ -11,7 +12,7 @@ const lora = Lora({
 
 const geistSans = Geist({
   subsets: ["latin"],
-  variable: "--font-geist-sans",
+  variable: "--font-sans",
 });
 
 const geistMono = Geist_Mono({
@@ -31,17 +32,20 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${lora.variable}`}
     >
-      <body className="min-h-screen flex flex-col antialiased">
+      <body className="min-h-screen flex flex-col bg-background text-foreground antialiased selection:bg-primary/20">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
           {/* Header */}
-          <header className="border-b">
-            <div className="container mx-auto px-4 py-4">
-              <h1 className="text-2xl font-bold">Mockmate-AI</h1>
+          <header className="border-b border-border/40 bg-background/95 backdrop-blur-md sticky top-0 z-50">
+            <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+              <h1 className="text-xl font-bold font-serif tracking-tight text-foreground select-none">
+                Mockmate-AI
+              </h1>
+              <ModeToggle />
             </div>
           </header>
 
