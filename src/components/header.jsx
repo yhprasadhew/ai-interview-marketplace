@@ -8,8 +8,8 @@ import Link from "next/link";
 function Logo() {
   return (
     <svg
-      width="34"
-      height="34"
+      width="40"
+      height="40"
       viewBox="0 0 36 36"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -64,29 +64,28 @@ export function Header() {
 
   return (
     <header className="border-b border-border/40 bg-background/95 backdrop-blur-md sticky top-0 z-50 supports-[backdrop-filter]:bg-background/80">
-      <div className="w-full max-w-screen-2xl mx-auto px-6 lg:px-10 py-3 flex items-center justify-between">
+      <div className="w-full max-w-screen-2xl mx-auto px-6 lg:px-10 py-5 flex items-center justify-between">
         {/* Branding */}
-        <Link href="/" className="flex items-center gap-2.5 select-none group">
+        <Link href="/" className="flex items-center gap-3 select-none group">
           <Logo />
-          <span className="text-lg font-semibold tracking-tight text-foreground group-hover:opacity-90 transition-opacity">
+          <span className="text-xl font-bold tracking-tight text-foreground group-hover:opacity-90 transition-opacity">
             mockmate
             <span className="text-teal-500 dark:text-teal-400">.ai</span>
           </span>
         </Link>
 
         {/* Navigation & Auth Actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           <ModeToggle />
 
           {isLoaded && (
             <>
               {!isSignedIn ? (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   <SignInButton mode="modal">
                     <Button
                       variant="ghost"
-                      size="sm"
-                      className="cursor-pointer font-medium text-muted-foreground hover:text-foreground"
+                      className="h-10 px-4 cursor-pointer font-semibold text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
                       Sign In
                     </Button>
@@ -94,8 +93,7 @@ export function Header() {
 
                   <SignUpButton mode="modal">
                     <Button
-                      size="sm"
-                      className="cursor-pointer font-medium bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm"
+                      className="h-10 px-5 cursor-pointer font-semibold text-sm bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm rounded-lg transition-colors"
                     >
                       Get Started
                     </Button>
@@ -106,7 +104,7 @@ export function Header() {
                   <UserButton
                     appearance={{
                       elements: {
-                        avatarBox: "w-8 h-8 rounded-full border border-border/50 shadow-sm",
+                        avatarBox: "w-10 h-10 rounded-full border border-border/50 shadow-sm",
                       },
                     }}
                   />
