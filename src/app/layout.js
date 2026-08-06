@@ -1,3 +1,4 @@
+import { ClerkProvider } from "@clerk/nextjs";
 import { Geist, Geist_Mono, Lora } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -27,33 +28,36 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${lora.variable}`}
-    >
-      <body className="min-h-screen flex flex-col bg-background text-foreground antialiased selection:bg-primary/20">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {/* Header */}
-          <header className="border-b border-border/40 bg-background/95 backdrop-blur-md sticky top-0 z-50">
-            <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-              <h1 className="text-xl font-bold font-serif tracking-tight text-foreground select-none">
-                Mockmate-AI
-              </h1>
-              <ModeToggle />
-            </div>
-          </header>
+    <ClerkProvider>
+      <html
+        lang="en"
+        suppressHydrationWarning
+        className={`${geistSans.variable} ${geistMono.variable} ${lora.variable}`}
+      >
+        <body className="min-h-screen flex flex-col bg-background text-foreground antialiased selection:bg-primary/20">
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {/* Header */}
+            <header className="border-b border-border/40 bg-background/95 backdrop-blur-md sticky top-0 z-50">
+              <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+                <h1 className="text-xl font-bold font-serif tracking-tight text-foreground select-none">
+                  Mockmate-AI
+                </h1>
 
-          <main className="flex-1">
-            {children}
-          </main>
-        </ThemeProvider>
-      </body>
-    </html>
+                <ModeToggle />
+              </div>
+            </header>
+
+            <main className="flex-1">
+              {children}
+            </main>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
