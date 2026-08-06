@@ -1,13 +1,18 @@
-export const GrayTitle = ({ children }) => {<span className="bg-linear-to-br from-stone-100 via-stone-300 to stone-500 bg-clip-text-transparent">
+export const GrayTitle = ({ children, className = "" }) => (
+  <h1 className={`text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl ${className}`}>
     {children}
-</span>};
+  </h1>
+);
 
-export const GoldTitle = ({ children }) => {<span className="bg-linear-to-br from-amber-300 via-amber-300 to-amber-600 bg-clip-text-transparent">
-
+export const GoldTitle = ({ children, className = "" }) => (
+  <span className={`block bg-linear-to-br from-amber-300 via-amber-400 to-amber-600 bg-clip-text text-transparent ${className}`}>
     {children}
-    </span>};
+  </span>
+);
 
-export const sectionLabel = ({ children }) => 
-{<span className="bg-linear-to-br from-stone-100 via-stone-300 to stone-500 bg-clip-text-transparent">
-{children}</span>};
+export const SectionLabel = ({ children, className = "" }) => (
+  <p className={`text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground ${className}`}>
+    {children}
+  </p>
+);
 
