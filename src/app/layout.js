@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono, Lora } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const lora = Lora({
   subsets: ["latin"],
@@ -31,16 +32,23 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} ${lora.variable}`}
     >
       <body className="min-h-screen flex flex-col antialiased">
-        {/* Header */}
-        <header className="border-b">
-          <div className="container mx-auto px-4 py-4">
-            <h1 className="text-2xl font-bold">Mockmate-AI</h1>
-          </div>
-        </header>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {/* Header */}
+          <header className="border-b">
+            <div className="container mx-auto px-4 py-4">
+              <h1 className="text-2xl font-bold">Mockmate-AI</h1>
+            </div>
+          </header>
 
-        <main className="flex-1">
-          {children}
-        </main>
+          <main className="flex-1">
+            {children}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );
