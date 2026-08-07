@@ -7,6 +7,8 @@ import { CodeDemo } from "@/components/demo-components-animate-code";
 import { LOGOS } from "@/lib/data";
 import Image from "next/image";
 import { SectionHeading } from "@/components/reusable";
+import { BentoCard } from "@/components/BentoCard";
+import { Bot } from "lucide-react";
 
 export default function Home() {
   return (
@@ -123,7 +125,12 @@ export default function Home() {
 
         <div className = "grid grid-cols-12 gap-4">
           <div className="col-span-12 md:col-span-7">
-            
+            <BentoCard
+              icon={<Bot size={20} className="text-amber-400" />}
+              title="Real-Time AI Scoring"
+              description="Get instant feedback on your technical skills and communication abilities."
+              link="/features"
+          > </BentoCard>
           </div>
         </div>
       </section>
