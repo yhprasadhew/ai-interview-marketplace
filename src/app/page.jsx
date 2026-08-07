@@ -4,11 +4,11 @@ import { SectionLabel } from "@/components/reusable";
 import { Button } from "@/components/ui/button";
 import { StarsBackgroundDemo } from "@/components/ui/demo-components-backgrounds-stars";
 import { CodeDemo } from "@/components/demo-components-animate-code";
-import { LOGOS } from "@/lib/data";
+import { LOGOS, ROLES, PLANS } from "@/lib/data";
 import Image from "next/image";
 import { SectionHeading } from "@/components/reusable";
 import { BentoCard } from "@/components/BentoCard";
-import { Bot } from "lucide-react";
+import { Bot, Sparkles, Video, FileText } from "lucide-react";
 
 export default function Home() {
   return (
@@ -115,26 +115,164 @@ export default function Home() {
 
 
       <section className="relative z-10 py-28 max-w-5xl mx-auto px-6" >
-        <div className = "text-center mb-16">
-        <SectionLabel> Features</SectionLabel>
-        <SectionHeading
-         gray="Everything you need" 
-         gold="nothing you don't" 
-         />
+        <div className="text-center mb-16">
+          <SectionLabel>Features</SectionLabel>
+          <SectionHeading
+            gray="Everything you need" 
+            gold="nothing you don't" 
+          />
         </div>
 
-        <div className = "grid grid-cols-12 gap-4">
+        <div className="grid grid-cols-12 gap-4">
+          {/* Row 1 */}
           <div className="col-span-12 md:col-span-7">
             <BentoCard
               icon={<Bot size={20} className="text-amber-400" />}
               title="Real-Time AI Scoring"
-              description="Get instant feedback on your technical skills and communication abilities."
-              link="/features"
-          > </BentoCard>
+              description="Get instant feedback on your technical answers, syntax logic, and verbal communication as you speak."
+              link="/features/ai-scoring"
+            />
+          </div>
+
+          <div className="col-span-12 md:col-span-5">
+            <BentoCard
+              icon={<Sparkles size={20} className="text-amber-400" />}
+              title="Role Simulations"
+              description="Practice roles tailored to top tech companies, from Frontend Developer to Product Manager."
+              link="/features/simulations"
+            />
+          </div>
+
+          {/* Row 2 */}
+          <div className="col-span-12 md:col-span-5">
+            <BentoCard
+              icon={<Video size={20} className="text-amber-400" />}
+              title="Mock Video Rooms"
+              description="Experience realistic simulated video settings with built-in code compilers and prompt boards."
+              link="/features/video-rooms"
+            />
+          </div>
+
+          <div className="col-span-12 md:col-span-7">
+            <BentoCard
+              icon={<FileText size={20} className="text-amber-400" />}
+              title="Deep Feedback Reports"
+              description="Receive comprehensive post-interview feedback highlighting fillers, vocabulary, and optimal technical solutions."
+              link="/features/reports"
+            />
           </div>
         </div>
       </section>
 
+      {/* Target Audience Section (Interviewees / Interviewers) */}
+      <section className="relative z-10 py-24 max-w-5xl mx-auto px-6 border-t border-slate-800/60">
+        <div className="text-center mb-16">
+          <SectionLabel>WHO IS IT FOR?</SectionLabel>
+          <h2 className="font-serif text-3xl md:text-4xl font-bold tracking-tight text-slate-100 mt-2">
+            Built for both sides of the table
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {ROLES.map((role) => (
+            <div 
+              key={role.label}
+              className="relative bg-slate-900/40 border border-slate-800 hover:border-amber-400/20 rounded-2xl p-8 flex flex-col justify-between transition-all duration-300 group"
+            >
+              <div>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800 text-xs font-semibold text-amber-400 mb-6">
+                  {role.label}
+                </span>
+
+                <div className="mb-4">
+                  <div className="[&_h1]:text-2xl [&_h1]:sm:text-3xl [&_h1]:font-bold [&_span]:text-2xl [&_span]:sm:text-3xl [&_span]:font-bold">
+                    {role.title}
+                  </div>
+                </div>
+
+                <p className="text-sm text-slate-400 leading-relaxed mb-8">
+                  {role.desc}
+                </p>
+
+                <ul className="space-y-3.5 mb-8">
+                  {role.perks.map((perk, idx) => (
+                    <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-300">
+                      <span className="text-amber-400 font-semibold mt-0.5 shrink-0">✓</span>
+                      <span>{perk}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="pt-4 border-t border-slate-800/60 mt-auto">
+                <Button className="w-full bg-slate-850 hover:bg-slate-800 text-slate-200 border border-slate-800 hover:border-slate-700 transition-colors">
+                  Join as {role.label}
+                </Button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="relative z-10 py-24 max-w-5xl mx-auto px-6 border-t border-slate-800/60">
+        <div className="text-center mb-16">
+          <SectionLabel>PRICING</SectionLabel>
+          <h2 className="font-serif text-3xl md:text-4xl font-bold tracking-tight text-slate-100 mt-2">
+            Simple, transparent pricing
+          </h2>
+          <p className="mt-4 text-slate-400 text-sm max-w-md mx-auto">
+            Choose the plan that fits your preparation needs. Upgrade or cancel anytime.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {PLANS.map((plan) => (
+            <div
+              key={plan.name}
+              className={`relative rounded-2xl p-8 flex flex-col justify-between transition-all duration-300 border ${
+                plan.featured
+                  ? "bg-slate-900/60 border-amber-400/30 shadow-xl shadow-amber-400/5 ring-1 ring-amber-400/20"
+                  : "bg-slate-900/40 border-slate-800 hover:border-slate-700"
+              }`}
+            >
+              {plan.featured && (
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-amber-400 text-slate-950 text-[10px] font-extrabold tracking-wider uppercase">
+                  Most Popular
+                </span>
+              )}
+
+              <div>
+                <h3 className="text-lg font-bold text-slate-100 mb-2">{plan.name}</h3>
+                <div className="flex items-baseline gap-1.5 mb-2">
+                  <span className="text-3xl font-extrabold text-slate-100">{plan.price}</span>
+                  <span className="text-xs text-slate-400 font-medium">/ month</span>
+                </div>
+                <p className="text-xs text-amber-400 font-semibold mb-6">{plan.credits}</p>
+
+                <ul className="space-y-3 mb-8 border-t border-slate-800/60 pt-6">
+                  {plan.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-300">
+                      <span className="text-emerald-400 font-semibold shrink-0">✓</span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <Button
+                className={`w-full font-semibold transition-all ${
+                  plan.featured
+                    ? "bg-amber-400 hover:bg-amber-300 text-slate-950 shadow-md"
+                    : "bg-slate-850 hover:bg-slate-800 text-slate-200 border border-slate-800 hover:border-slate-700"
+                }`}
+              >
+                Choose {plan.name}
+              </Button>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
