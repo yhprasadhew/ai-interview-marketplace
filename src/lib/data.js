@@ -1,13 +1,11 @@
-import { GoldTitle, GrayTitle } from "@/components/reusables";
+import { GoldTitle, GrayTitle } from "@/components/reusable";
 
 export const LOGOS = [
-  { src: "/amazon.svg", alt: "Amazon" },
-  { src: "/atlassian.svg", alt: "Atlassian" },
-  { src: "/google.webp", alt: "Google" },
-  { src: "/meta.svg", alt: "Meta" },
-  { src: "/microsoft.webp", alt: "Microsoft" },
-  { src: "/netflix.png", alt: "Netflix" },
-  { src: "/uber.svg", alt: "Uber" },
+  { src: "/google.webp", alt: "Google", effect: "grayscale" },
+  { src: "/meta.svg", alt: "Meta", effect: "grayscale" },
+  { src: "/amazon.svg", alt: "Amazon", effect: "invert" },
+  { src: "/atlassian.svg", alt: "Atlassian", effect: "invert" },
+  { src: "/uber.svg", alt: "Uber", effect: "invert" },
 ];
 
 export const AVATARS = [

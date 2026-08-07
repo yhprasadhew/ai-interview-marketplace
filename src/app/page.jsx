@@ -4,6 +4,9 @@ import { SectionLabel } from "@/components/reusable";
 import { Button } from "@/components/ui/button";
 import { StarsBackgroundDemo } from "@/components/ui/demo-components-backgrounds-stars";
 import { CodeDemo } from "@/components/demo-components-animate-code";
+import { LOGOS } from "@/lib/data";
+import Image from "next/image";
+import { SectionHeading } from "@/components/reusable";
 
 export default function Home() {
   return (
@@ -86,6 +89,45 @@ export default function Home() {
         </div>
 
       </section>
+
+      <section className="relative z-10 border-y border-slate-800/60 py-12">
+        <p className="text-center text-[10px] font-bold tracking-widest text-slate-500 uppercase mb-8">
+          Mockmate candidates got hired at top tech companies
+        </p>
+
+        <div className="flex flex-wrap items-center justify-center gap-12 md:gap-20 px-6">
+          {LOGOS.map((l) => (
+            <Image
+              key={l.alt}
+              src={l.src}
+              alt={l.alt}
+              width={100}
+              height={32}
+              className={`h-6 w-auto object-contain opacity-45 hover:opacity-90 transition-all duration-300 ${
+                l.effect === "invert" ? "invert brightness-200" : "grayscale brightness-200"
+              }`}
+            />
+          ))}
+        </div>
+      </section>
+
+
+      <section className="relative z-10 py-28 max-w-5xl mx-auto px-6" >
+        <div className = "text-center mb-16">
+        <SectionLabel> Features</SectionLabel>
+        <SectionHeading
+         gray="Everything you need" 
+         gold="nothing you don't" 
+         />
+        </div>
+
+        <div className = "grid grid-cols-12 gap-4">
+          <div className="col-span-12 md:col-span-7">
+            
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }

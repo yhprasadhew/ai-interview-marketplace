@@ -35,12 +35,12 @@ session.on("feedback", (metrics) => {
 });`}
     >
       <CodeHeader icon={Terminal} copyButton className="bg-zinc-900 border-b border-zinc-800 text-zinc-400">
-        mockmate-session.ts
+        mockmate-session.js
       </CodeHeader>
 
       <CodeBlock
         cursor={cursor}
-        lang="typescript"
+        lang="javascript"
         writing={writing}
         duration={duration}
         delay={delay}
